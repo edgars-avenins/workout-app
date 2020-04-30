@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const MyStats = ({data}) => {
+export const MyStats = ({data, name}) => {
     
     let workoutData = data || []
     
@@ -8,7 +8,7 @@ export const MyStats = ({data}) => {
         <table>
             <thead>
                 <tr>
-                    <th colSpan='4'>{name ? name : 'Zanda'}</th>
+                    <th colSpan='4'>{name ? name : 'Anonymous'}</th>
                 </tr>
             </thead>
             <tbody>

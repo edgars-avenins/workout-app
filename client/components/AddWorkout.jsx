@@ -11,13 +11,11 @@ class AddWorkout extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault()
 
-        const { data } = this.props
-
+        const { data, name } = this.props
         
         const fb = this.props.firebase
-        const ref = fb.database().ref(`/edgars/${this.state.exercise}`)
+        const ref = fb.database().ref(`/${name}/${this.state.exercise}`)
 
-        let obj = {}
         
         if(Object.keys(data).includes(this.state.exercise)){
             ref.set(Object.assign(data[this.state.exercise],{'29-04-20': Math.floor(Math.random()*100)}))

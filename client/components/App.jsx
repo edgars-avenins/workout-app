@@ -4,29 +4,56 @@ import {MyStats} from './MyStats'
 import AddWorkout from './AddWorkout';
 
 class App extends React.Component {
-    
+ 
+    state = {
+        workouts: '',
+        showAdd: false
+    }
 
-    componentDidMount(){
+    handleSubmit = (e) => {
+        e.preventDefault()
+
         this.props.firebase
             .database()
-            .ref('/edgars')
-            .once('value').then(data=>{
-                    this.setState(data.val())
-                });
-        
-        // this.props.firebase
-        //     .database()
-        //     .ref('/workouts/edgars/')
-        //     .once('value')
-        //     .then(data => console.log(data.exists()))
+            .ref(`/${this.state.name}`)
+            .once('value', snap => {
+                if(snap.val() !== null){
+                    console.log('User exists, here is the data')
+                    this.setState({workouts: snap.val()})
+                }else{
+                    console.log('User doesn\'t exist!')
+                    this.setState({showAdd: true})
+                }
+                
+            })
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
     render(){
         return(
             <>
-            <h1>Time to flex those muscles baby!</h1>
-            <MyStats data={this.state}/>
-            <AddWorkout firebase={this.props.firebase} data={this.state}/>
+            <form onSubmit={this.handleSubmit}>
+                <label>Your name:
+                    <input type="text" name="name" onChange={this.handleChange}/>
+                </label>
+                <input type="submit"/>
+            </form>
+            {
+                this.state.workouts  && 
+                <>
+                    <h1>Time to flex those muscles baby!</h1>
+                    <MyStats data={this.state.workouts} name={this.state.name}/>
+                </>
+            }
+            {
+                this.state.showAdd &&
+                <AddWorkout firebase={this.props.firebase} data={this.state.workouts} name={this.state.name}/>
+            }
             </>
         )
     }
