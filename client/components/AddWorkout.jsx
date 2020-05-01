@@ -18,10 +18,10 @@ class AddWorkout extends React.Component {
 
         
         if(Object.keys(data).includes(this.state.exercise)){
-            ref.set(Object.assign(data[this.state.exercise],{'29-04-20': Math.floor(Math.random()*100)}))
+            ref.set(Object.assign(data[this.state.exercise],{[new Date().toLocaleDateString('nl')]: Math.floor(Math.random()*100)}))
         }else{
             ref.set({
-                '30-04-20': Math.floor(Math.random()*100)
+                [new Date().toLocaleDateString('nl')] : Math.floor(Math.random()*100)
             })
         }
 

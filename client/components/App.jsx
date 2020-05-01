@@ -16,10 +16,10 @@ class App extends React.Component {
         this.props.firebase
             .database()
             .ref(`/${this.state.name}`)
-            .once('value', snap => {
+            .on('value', snap => {
                 if(snap.val() !== null){
                     console.log('User exists, here is the data')
-                    this.setState({workouts: snap.val()})
+                    this.setState({workouts: snap.val(),showAdd: true})
                 }else{
                     console.log('User doesn\'t exist!')
                     this.setState({showAdd: true})
@@ -44,7 +44,7 @@ class App extends React.Component {
                 <input type="submit"/>
             </form>
             {
-                this.state.workouts  && 
+                (this.state.workouts && this.state.showAdd)  && 
                 <>
                     <h1>Time to flex those muscles baby!</h1>
                     <MyStats data={this.state.workouts} name={this.state.name}/>
