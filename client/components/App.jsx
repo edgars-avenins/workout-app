@@ -1,12 +1,16 @@
 import React from 'react'
+import { HashRouter as Router, Route, Link } from 'react-router-dom'
 
 import {MyStats} from './MyStats'
 import AddWorkout from './AddWorkout';
+import {Nav} from './Nav'
 
 class App extends React.Component {
  
     state = {
         workouts: '',
+        showStats: false,
+        showForm: true,
         showAdd: false
     }
 
@@ -19,10 +23,10 @@ class App extends React.Component {
             .on('value', snap => {
                 if(snap.val() !== null){
                     console.log('User exists, here is the data')
-                    this.setState({workouts: snap.val(),showAdd: true})
+                    this.setState({workouts: snap.val(),showForm: false,showAdd: true})
                 }else{
                     console.log('User doesn\'t exist!')
-                    this.setState({showAdd: true})
+                    this.setState({showForm: false, showAdd: true})
                 }
                 
             })
@@ -34,27 +38,36 @@ class App extends React.Component {
         })
     }
 
+    showStats = () => {
+        this.setState({showStats: !this.state.showStats})
+    }
+
     render(){
         return(
-            <>
-            <form onSubmit={this.handleSubmit}>
-                <label>Your name:
-                    <input type="text" name="name" onChange={this.handleChange}/>
-                </label>
-                <input type="submit"/>
-            </form>
+            <Router>
+                <Route path='/' render={() => (
+                    <Nav showAdd={this.state.showAdd} workouts={this.state.workouts}/>
+                )}/>
             {
-                (this.state.workouts && this.state.showAdd)  && 
-                <>
-                    <h1>Time to flex those muscles baby!</h1>
-                    <MyStats data={this.state.workouts} name={this.state.name}/>
-                </>
+                this.state.showForm &&
+                <form onSubmit={this.handleSubmit}>
+                    <label>Your name:
+                        <input type="text" name="name" onChange={this.handleChange}/>
+                    </label>
+                    <input type="submit"/>
+                </form>
             }
-            {
-                this.state.showAdd &&
-                <AddWorkout firebase={this.props.firebase} data={this.state.workouts} name={this.state.name}/>
-            }
-            </>
+            <Route path='/stats' render={ (props)=>(
+                <MyStats {...props} data={this.state.workouts} name={this.state.name}/>
+            )}/>
+
+
+            <Route path='/add' render={(props) => (
+                <AddWorkout {...props} firebase={this.props.firebase} data={this.state.workouts} name={this.state.name}/>
+            )}/>
+
+
+            </Router>
         )
     }
 }
