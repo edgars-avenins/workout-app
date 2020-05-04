@@ -3,23 +3,70 @@ import React from 'react'
 export const MyStats = ({data, name}) => {
     
     let workoutData = data || []
+    let dates = []
+    if(data){
+        Object.keys(data).map(item => {
+            return Object.keys(data[item]).map(el => {
+                if(!dates.includes(el)) dates.push(el)
+                return
+            })
+        })
+
+        let unSorted = dates.map(item => {
+            return item.split('-')
+        })
+
+        let sorted = unSorted.map((item, i) => {
+            return Date.UTC(item[2], item[1]-1, item[0])
+        }).sort()
+        console.log(dates)
+        dates = sorted.map(item => {
+
+            return new Date(Number(item)).toLocaleDateString('nl')        
+        })
+        console.log(dates)
+        
+        
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     
     return(
         <table>
             <thead>
                 <tr>
-                    <th colSpan='4'>{name ? name : 'Anonymous'}</th>
+                    <th colSpan={dates.length+1}>{name ? name : 'Anonymous'}</th>
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <td id='zero' className='dates exercises'></td>
+                    {
+                        dates.map(date => <td className='dates'>{date}</td>)
+                    }
+                </tr>
                 {
                     Object.keys(workoutData).map((item, i) => {
                         return <tr key={i}>
-                            <td>{item}</td>
+                            <td className='exercises'>{item}</td>
                             {
-                                Object.keys(workoutData[item]).map((el, i) => {
+                                dates.map((date, i) => {
                                     return <td key={i}>
-                                        {workoutData[item][el]}
+                                        {
+                                            workoutData[item][date] ? 
+                                            workoutData[item][date] :
+                                            ''
+                                        }
                                     </td>
                                 })
                             }
@@ -30,3 +77,5 @@ export const MyStats = ({data, name}) => {
         </table>
     )
 }
+
+//chartjs react chart js
