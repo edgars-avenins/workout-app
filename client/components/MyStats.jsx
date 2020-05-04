@@ -19,28 +19,14 @@ export const MyStats = ({data, name}) => {
         let sorted = unSorted.map((item, i) => {
             return Date.UTC(item[2], item[1]-1, item[0])
         }).sort()
-        console.log(dates)
+
         dates = sorted.map(item => {
 
             return new Date(Number(item)).toLocaleDateString('nl')        
-        })
-        console.log(dates)
-        
+        })        
         
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    
     return(
         <table>
             <thead>
@@ -52,7 +38,7 @@ export const MyStats = ({data, name}) => {
                 <tr>
                     <td id='zero' className='dates exercises'></td>
                     {
-                        dates.map(date => <td className='dates'>{date}</td>)
+                        dates.map((date, i) => <td key={i} className='dates'>{date}</td>)
                     }
                 </tr>
                 {
@@ -77,5 +63,3 @@ export const MyStats = ({data, name}) => {
         </table>
     )
 }
-
-//chartjs react chart js
