@@ -6,4 +6,16 @@ table,
 th,
 td {
     border: 1px solid #333;
+    text-align: center;
+}
+
+#zero{
+    background-color: darkgrey;
+}
+.dates {
+    border-bottom: 3px solid #333;
+}
+
+.exercises {
+    border-right: 3px solid #333
 }
