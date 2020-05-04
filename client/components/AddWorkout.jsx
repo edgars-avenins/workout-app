@@ -16,26 +16,31 @@ class AddWorkout extends React.Component {
         const fb = this.props.firebase
         const ref = fb.database().ref(`/${name}/${this.state.exercise}`)
 
+        let value = this.state.amount
+        if(this.state.type == 'Repetitions') value += 'x'
+        else if(this.state.type == 'Time') value += 's'
+        else if(this.state.type == 'Distance') value += 'km'
         
         if(Object.keys(data).includes(this.state.exercise)){
-            ref.set(Object.assign(data[this.state.exercise],{[new Date().toLocaleDateString('nl')]: Math.floor(Math.random()*100)}))
+            ref.set(Object.assign(data[this.state.exercise],{[new Date().toLocaleDateString('nl')]: value}))
         }else{
             ref.set({
-                [new Date().toLocaleDateString('nl')] : Math.floor(Math.random()*100)
+                [new Date().toLocaleDateString('nl')] : value
             })
         }
 
     }
 
     handleChange = (e) => {
+        if(this.state[e.target.name]){
+
+        }
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
     render(){
-        let type1 = this.state.type1 || 'none'
-        let type2 = this.state.type2 || 'none'
         return(
             <form onSubmit={this.handleSubmit}>
                 <label>Exercise
@@ -43,25 +48,21 @@ class AddWorkout extends React.Component {
                 </label>
                 <br/>
                 <label>Select exercise Type
-                    <select onChange={this.handleChange} name="type1" id="">
+
+                    <br/>
+
+                    <select onChange={this.handleChange} name="type" id="">
                         <option value="">Choose...</option>
                         {
                             options.map((item, i) => {
-                                if(type2 != item)
                                 return <option key={i} value={item}>{item}</option>
                             })
                         }
                     </select>
-                    <select onChange={this.handleChange} name="type2" id="">
-                        <option value="">If necessary...</option>
-                        {
-                            options.map((item, i) => {
-                                if(type1 != item)
-                                return <option key={i} value={item}>{item}</option>
-                            })
-                        }
-                    </select>
+                    <input type="text" name='amount' onChange={this.handleChange} placeholder="amount"/>
+
                 </label>
+                <br/>
                 <input type="submit"/>
             </form>
         )
