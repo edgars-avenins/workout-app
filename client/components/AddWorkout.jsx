@@ -5,7 +5,9 @@ import {options} from '../utils'
 class AddWorkout extends React.Component {
 
     state = {
-
+        amount: '',
+        exercise: '',
+        type: ''
     }
 
     handleSubmit = (e) => {
@@ -29,6 +31,7 @@ class AddWorkout extends React.Component {
             })
         }
 
+        this.setState({amount: '', exercise: '', type: ''})
     }
 
     handleChange = (e) => {
@@ -43,27 +46,40 @@ class AddWorkout extends React.Component {
     render(){
         return(
             <form onSubmit={this.handleSubmit}>
-                <label>Exercise
-                    <input name='exercise' onChange={this.handleChange} type="text"/>
-                </label>
-                <br/>
-                <label>Select exercise Type
+                <div className='shadow p-1 mb-2 bg-white rounded'>
+                    <h2 className='display-4'>Exercise</h2>
+                        <input
+                            type='text'
+                            name='exercise'
+                            value={this.state.exercise}
+                            onChange={this.handleChange}
+                            />
+                </div>
+                <div className='shadow p-1 mb-2 bg-white rounded'>
+                    <h2 className='display-4'>Exercise Type</h2>
+                        <select className='h2' onChange={this.handleChange} name="type" value={this.state.type}>
+                            <option className='h6' value="">Choose...</option>
+                            {
+                                options.map((item, i) => {
+                                    return <option className='h6' key={i} value={item}>{item}</option>
+                                })
+                            }
+                        </select>
+                </div>
+                <div className='shadow p-1 bg-white rounded'>
+                    <input
+                        type='text'
+                        name='amount'
+                        placeholder="amount"
+                        value={this.state.amount}
+                        onChange={this.handleChange}
+                        />
 
-                    <br/>
-
-                    <select onChange={this.handleChange} name="type" id="">
-                        <option value="">Choose...</option>
-                        {
-                            options.map((item, i) => {
-                                return <option key={i} value={item}>{item}</option>
-                            })
-                        }
-                    </select>
-                    <input type="text" name='amount' onChange={this.handleChange} placeholder="amount"/>
-
-                </label>
-                <br/>
-                <input type="submit"/>
+                    <input
+                        type="submit"
+                        className='btn btn-primary my-2'
+                        />
+                </div>
             </form>
         )
     }
