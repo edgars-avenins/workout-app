@@ -4,6 +4,8 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom'
 import {MyStats} from './MyStats'
 import AddWorkout from './AddWorkout';
 import {Nav} from './Nav'
+import { Home } from './Home';
+import { How } from './How';
 
 class App extends React.Component {
  
@@ -45,26 +47,36 @@ class App extends React.Component {
     render(){
         return(
             <Router>
-                <Route path='/' render={() => (
-                    <Nav showAdd={this.state.showAdd} workouts={this.state.workouts}/>
+                <Nav showAdd={this.state.showAdd} workouts={this.state.workouts}/>
+                <Route exact path='/' render={() => (
+                        this.state.showForm ?
+                        <form onSubmit={this.handleSubmit} className='shadow p-1 mb-2 bg-white rounded'>
+                             <h2 className='display-4'>User Name:</h2>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    onChange={this.handleChange}
+                                    />
+                            
+                            <br/>
+                            <input
+                                type="submit"
+                                className='mt-2 btn btn-primary'
+                            />
+                        </form>
+                        :
+                        <Home data={this.state.workouts}/>
                 )}/>
-            {
-                this.state.showForm &&
-                <form onSubmit={this.handleSubmit}>
-                    <label>Your name:
-                        <input type="text" name="name" onChange={this.handleChange}/>
-                    </label>
-                    <input type="submit"/>
-                </form>
-            }
-            <Route path='/stats' render={ (props)=>(
-                <MyStats {...props} data={this.state.workouts} name={this.state.name}/>
-            )}/>
+
+                <Route exact path='/how' component={How}/>
+                <Route path='/stats' render={ (props)=>(
+                    <MyStats {...props} data={this.state.workouts} name={this.state.name}/>
+                )}/>
 
 
-            <Route path='/add' render={(props) => (
-                <AddWorkout {...props} firebase={this.props.firebase} data={this.state.workouts} name={this.state.name}/>
-            )}/>
+                <Route path='/add' render={(props) => (
+                    <AddWorkout {...props} firebase={this.props.firebase} data={this.state.workouts} name={this.state.name}/>
+                )}/>
 
 
             </Router>
