@@ -3,30 +3,29 @@ import { Link } from 'react-router-dom'
 
 
 export const Nav = ({ showAdd, workouts }) => {
+
     return (
-        <nav className="navbar navbar-expand-md navbar-light bg-light fixed-top">
-            <a className="navbar-brand" href="#">Home</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
 
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
+                <ul className="navbar navbar-nav flex-row mr-auto bg-light fixed-top">
+                    <li className='nav-item'>
+                        <Link className="navbar-brand border px-1" to='/'><i className="fas fa-dumbbell fa-3x"></i></Link>
 
+                    </li>
                 {   
                     workouts &&
-                    <li className="nav-item active" data-toggle='collapse' data-target='.navbar-collapse'>
-                        <Link className="nav-link" to='/stats'>Stats</Link>
+                    <li className='nav-item' >
+                        <Link className="nav-link" to='/stats'><i className="fas fa-chart-bar fa-2x"></i></Link>
                     </li>
                 }
                 {   showAdd &&
-                    <li className="nav-item active"  data-toggle='collapse' data-target='.navbar-collapse'>
-                        <Link className="nav-link" to='/add'>New</Link>
+                    <li className="nav-item" >
+                        <Link className="nav-link" to='/add'><i className="fas fa-plus fa-2x"></i></Link>
                     </li>
                 }
+                    <li className="nav-item" >
+                        <Link className="nav-link" to='/how'><i className="fas fa-question fa-2x"></i></Link>
+                    </li>
                 </ul>
-                
-            </div>
-        </nav>
+
     )
 }

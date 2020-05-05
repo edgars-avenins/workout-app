@@ -1,14 +1,26 @@
 body {
-    padding-top: 70px;
+    padding-top: 86px;
+    background-color: grey;
 }
 
-table,
-th,
-td {
+table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+table thead tbody {
+    display: table;
+    width: 100%;
+  }
+
+th, td {
     border: 1px solid #333;
     text-align: center;
 }
-
+h2 {
+    border-bottom: groove gray 2px;
+}
 #zero{
     background-color: darkgrey;
 }
@@ -18,4 +30,32 @@ td {
 
 .exercises {
     border-right: 3px solid #333
+}
+
+input {
+    text-align: center;
+    font-size: 28px
+}
+
+.centerWebkit {
+    text-align: -webkit-center;
+}
+/* overrides */
+
+.container {
+    padding-top: 1.5rem;
+    text-align: center;
+}
+
+.navbar {
+    padding-left: 1rem;
+}
+
+a,a:link,a:visited,a:hover,a:focus,a:active{
+    color: inherit;
+    text-decoration: none;
+}
+
+.card-img-top {
+    height: 12rem;
 }

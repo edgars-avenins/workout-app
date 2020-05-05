@@ -27,8 +27,9 @@ export const MyStats = ({data, name}) => {
         
     }
 
+    
     return(
-        <table>
+        <table className='table bg-white'>
             <thead>
                 <tr>
                     <th colSpan={dates.length+1}>{name ? name : 'Anonymous'}</th>
@@ -43,7 +44,7 @@ export const MyStats = ({data, name}) => {
                 </tr>
                 {
                     Object.keys(workoutData).map((item, i) => {
-                        return <tr key={i}>
+                        return <tr key={i} >
                             <td className='exercises'>{item}</td>
                             {
                                 dates.map((date, i) => {
