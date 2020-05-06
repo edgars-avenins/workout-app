@@ -1,44 +1,80 @@
 body {
     padding-top: 86px;
-    background-color: grey;
+    background-color: #177592;
+    background-image: url("https://www.transparenttextures.com/patterns/3px-tile.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 table {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
+    max-height: 40vh;
+    font-size: 10px;
+    color: #212529;
+    font-family: 'Hanuman', serif;
 }
 
 table thead tbody {
     display: table;
-    width: 100%;
+    max-width: 100%;
   }
+thead th {
+    border: none
+}
 
 th, td {
     border: 1px solid #333;
     text-align: center;
+    padding: .1rem;
 }
+
 h2 {
     border-bottom: groove gray 2px;
 }
-#zero{
-    background-color: darkgrey;
-}
+
 .dates {
-    border-bottom: 3px solid #333;
+    color: honeydew;
+    background-color: black;
 }
 
 .exercises {
-    border-right: 3px solid #333
+    color: honeydew;
+    background-color: black;
 }
 
 input {
     text-align: center;
-    font-size: 20px
+    font-size: 20px;
+    border: 1px solid #ff000075;
 }
 
 .centerWebkit {
     text-align: -webkit-center;
+}
+
+form {
+    font-family: 'IM Fell Double Pica SC', serif;
+    background-color: #9bdac4;
+    background-image: url("https://www.transparenttextures.com/patterns/3px-tile.png");
+}
+
+form div {
+    background-color: honeydew;
+}
+
+.graph {
+    padding: 2.5vw;
+    background-color: #7d9b46;
+    background-image: url("https://www.transparenttextures.com/patterns/3px-tile.png");
+}
+
+.navbar--hidden {
+    top: -87px;
+}
+
+#how {
+    background-color: honeydew;
 }
 /* overrides */
 
@@ -58,4 +94,21 @@ a,a:link,a:visited,a:hover,a:focus,a:active{
 
 .card-img-top {
     height: 12rem;
+    background-color: honeydew;
+}
+
+.card-body {
+    margin-top: 2vh;
+    background-color: honeydew;
+}
+
+.card {
+    padding: 2.5vw;
+    background-color: #7d9b46;
+    background-image: url("https://www.transparenttextures.com/patterns/3px-tile.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+
+.btn {
+    width: -webkit-fill-available;
 }

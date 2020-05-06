@@ -19,9 +19,9 @@ class AddWorkout extends React.Component {
         const ref = fb.database().ref(`/${name}/${this.state.exercise}`)
 
         let value = this.state.amount
-        if(this.state.type == 'Repetitions') value += 'x'
-        else if(this.state.type == 'Time') value += 's'
-        else if(this.state.type == 'Distance') value += 'km'
+        // if(this.state.type == 'Repetitions') value += 'x'
+        // else if(this.state.type == 'Time') value += 's'
+        // else if(this.state.type == 'Distance') value += 'km'
         
         if(Object.keys(data).includes(this.state.exercise)){
             ref.set(Object.assign(data[this.state.exercise],{[new Date().toLocaleDateString('nl')]: value}))
@@ -45,18 +45,19 @@ class AddWorkout extends React.Component {
 
     render(){
         return(
-            <form onSubmit={this.handleSubmit}>
-                <div className='shadow p-1 mb-2 bg-white rounded'>
-                    <h2 className='display-4'>Exercise</h2>
+            <form onSubmit={this.handleSubmit} className='shadow p-2 mb-2 bg-white rounded'>
+                <div className='shadow p-1 pb-3 mb-2 bg-white rounded'>
+                    <h1 className=''>Exercise</h1>
                         <input
                             type='text'
                             name='exercise'
+                            placeholder="Squats"
                             value={this.state.exercise}
                             onChange={this.handleChange}
                             />
                 </div>
                 <div className='shadow p-1 mb-2 bg-white rounded'>
-                    <h2 className='display-4'>Exercise Type</h2>
+                    <h1 className=''>Exercise Type</h1>
                         <select className='h2' onChange={this.handleChange} name="type" value={this.state.type}>
                             <option className='h6' value="">Choose...</option>
                             {
@@ -66,18 +67,22 @@ class AddWorkout extends React.Component {
                             }
                         </select>
                 </div>
-                <div className='shadow p-1 bg-white rounded'>
+                <div className='shadow p-1 pb-3 mb-2 bg-white rounded'>
+                    <h1 className=''>Amount</h1>
                     <input
                         type='text'
                         name='amount'
-                        placeholder="amount"
+                        placeholder="15"
                         value={this.state.amount}
                         onChange={this.handleChange}
                         />
-
+                    <br/>
+                </div>
+                <div className='shadow p-1 bg-white rounded'>
                     <input
                         type="submit"
-                        className='btn btn-primary my-2'
+                        value='Add Exercise'
+                        className='btn btn-primary m-2'
                         />
                 </div>
             </form>

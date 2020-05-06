@@ -1,4 +1,5 @@
 import React from 'react'
+import { prepData } from '../utils'
 
 export const MyStats = ({data, name}) => {
     
@@ -26,41 +27,50 @@ export const MyStats = ({data, name}) => {
         })        
         
     }
-
     
     return(
-        <table className='table bg-white'>
-            <thead>
-                <tr>
-                    <th colSpan={dates.length+1}>{name ? name : 'Anonymous'}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td id='zero' className='dates exercises'></td>
-                    {
-                        dates.map((date, i) => <td key={i} className='dates'>{date}</td>)
-                    }
-                </tr>
-                {
-                    Object.keys(workoutData).map((item, i) => {
-                        return <tr key={i} >
-                            <td className='exercises'>{item}</td>
+        <>
+        <div className='graph mb-2'>
+            <div className='shadow p-1 bg-white rounded'>
+                <table className=''>
+                    <thead className='bg-white'>
+                        <tr>
+                            <th colSpan={dates.length+1}>{name ? name : 'Anonymous'}</th>
+                        </tr>
+                    </thead>
+                    <tbody className='bg-white'>
+                        <tr>
+                            <td className='dates exercises'></td>
                             {
-                                dates.map((date, i) => {
-                                    return <td key={i}>
-                                        {
-                                            workoutData[item][date] ? 
-                                            workoutData[item][date] :
-                                            ''
-                                        }
-                                    </td>
-                                })
+                                dates.map((date, i) => <td key={i} className='dates'>{date}</td>)
                             }
                         </tr>
-                    })
-                }
-            </tbody>
-        </table>
+                        {
+                            Object.keys(workoutData).map((item, i) => {
+                                return <tr key={i} >
+                                    <td className='exercises'>{item}</td>
+                                    {
+                                        dates.map((date, i) => {
+                                            return <td key={i}>
+                                                {
+                                                    workoutData[item][date] ? 
+                                                    workoutData[item][date] :
+                                                    ''
+                                                }
+                                            </td>
+                                        })
+                                    }
+                                </tr>
+                            })
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {/* https://quickchart.io/documentation/ */}
+        <div className='graph'>
+            <img className='w-100 shadow p-2 mb-2 bg-white rounded' src={`https://quickchart.io/chart?c=${JSON.stringify(prepData(data))}`}/>
+        </div>
+        </>
     )
 }

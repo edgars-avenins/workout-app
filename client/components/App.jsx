@@ -3,7 +3,7 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom'
 
 import {MyStats} from './MyStats'
 import AddWorkout from './AddWorkout';
-import {Nav} from './Nav'
+import Nav from './Nav'
 import { Home } from './Home';
 import { How } from './How';
 
@@ -24,10 +24,8 @@ class App extends React.Component {
             .ref(`/${this.state.name}`)
             .on('value', snap => {
                 if(snap.val() !== null){
-                    console.log('User exists, here is the data')
                     this.setState({workouts: snap.val(),showForm: false,showAdd: true})
                 }else{
-                    console.log('User doesn\'t exist!')
                     this.setState({showForm: false, showAdd: true})
                 }
                 
@@ -50,19 +48,21 @@ class App extends React.Component {
                 <Nav showAdd={this.state.showAdd} workouts={this.state.workouts}/>
                 <Route exact path='/' render={() => (
                         this.state.showForm ?
-                        <form onSubmit={this.handleSubmit} className='shadow p-1 mb-2 bg-white rounded'>
-                             <h2 className='display-4'>User Name:</h2>
+                        <form onSubmit={this.handleSubmit} className='shadow p-1 rounded'>
+                            <div className='p-1 pb-2 mb-1 rounded'>
+                                <h2 className='display-4'>User Name</h2>
                                 <input
                                     type="text"
                                     name="name"
                                     onChange={this.handleChange}
                                     />
-                            
-                            <br/>
-                            <input
-                                type="submit"
-                                className='mt-2 btn btn-primary'
-                            />
+                            </div>
+                            <div className='rounded'>
+                                <input
+                                    type="submit"
+                                    className='m-2 btn btn-primary'
+                                />
+                            </div>
                         </form>
                         :
                         <Home data={this.state.workouts}/>
