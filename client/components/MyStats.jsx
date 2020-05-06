@@ -5,6 +5,8 @@ export const MyStats = ({data, name}) => {
     
     let workoutData = data || []
     let dates = []
+    let chartData = JSON.stringify(prepData(data, null))
+
     if(data){
         Object.keys(data).map(item => {
             return Object.keys(data[item]).map(el => {
@@ -27,7 +29,13 @@ export const MyStats = ({data, name}) => {
         })        
         
     }
-    
+
+    function handleClick(e){
+        chartData = prepData(data, e.target.id)
+        console.log(chartData)
+        //use react hooks to put chartData in state and get a re-render
+    }
+
     return(
         <>
         <div className='graph mb-2'>
@@ -51,7 +59,7 @@ export const MyStats = ({data, name}) => {
                                     <td className='exercises'>{item}</td>
                                     {
                                         dates.map((date, i) => {
-                                            return <td key={i}>
+                                            return <td key={i} id={item} onClick={handleClick}>
                                                 {
                                                     workoutData[item][date] ? 
                                                     workoutData[item][date] :
@@ -69,7 +77,7 @@ export const MyStats = ({data, name}) => {
         </div>
         {/* https://quickchart.io/documentation/ */}
         <div className='graph'>
-            <img className='w-100 shadow p-2 mb-2 bg-white rounded' src={`https://quickchart.io/chart?c=${JSON.stringify(prepData(data))}`}/>
+            <img className='w-100 shadow p-2 mb-2 bg-white rounded' src={`https://quickchart.io/chart?c=${chartData}`}/>
         </div>
         </>
     )
