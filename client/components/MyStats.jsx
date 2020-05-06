@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { prepData } from '../utils'
 
 export const MyStats = ({data, name}) => {
     
+    const [ chartData, setChartData ] = useState(JSON.stringify(prepData(data, null)))
+
     let workoutData = data || []
     let dates = []
-    let chartData = JSON.stringify(prepData(data, null))
 
     if(data){
         Object.keys(data).map(item => {
@@ -31,9 +32,7 @@ export const MyStats = ({data, name}) => {
     }
 
     function handleClick(e){
-        chartData = prepData(data, e.target.id)
-        console.log(chartData)
-        //use react hooks to put chartData in state and get a re-render
+        setChartData(JSON.stringify(prepData(data, e.target.id)))
     }
 
     return(
