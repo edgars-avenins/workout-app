@@ -1,15 +1,15 @@
 export const options = ['Repetitions', 'Time', 'Distance']
 
-export function prepData(data){
+export function prepData(data, key){
     let dataSetLabels = Object.keys(data)
     let barLabels = []
 
     dataSetLabels.map(item => {
-        return Object.keys(data[item]).map(el => {
+        return Object.keys(data[key ? key : item]).map(el => {
             if(!barLabels.includes(el)) barLabels.push(el)
         return
         })
-    })
+    })    
 
     let unSorted = barLabels.map(item => {
         return item.split('-')
@@ -50,13 +50,22 @@ export function prepData(data){
 
     dataSetLabels.map(exercise => {
         barLabels.map(date => {
-            if(data[exercise][date]) dataSetData.push(data[exercise][date])
+            if(data[key ? key : exercise][date]) dataSetData.push(data[key ? key : exercise][date])
             else dataSetData.push(0)
         })
-        dataSet.data.datasets.push({
-            label: exercise,
-            data: dataSetData
-        })
+        if(key){
+            if(dataSet.data.datasets.length === 0){
+                dataSet.data.datasets.push({
+                    label: key,
+                    data: dataSetData
+                })
+            }
+        }else{
+            dataSet.data.datasets.push({
+                label: exercise,
+                data: dataSetData
+            })
+        }
         dataSetData = []
     })
     
