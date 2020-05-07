@@ -6,6 +6,7 @@ import AddWorkout from './AddWorkout';
 import Nav from './Nav'
 import { Home } from './Home';
 import { How } from './How';
+import { Logo } from './Logo';
 
 class App extends React.Component {
  
@@ -45,27 +46,30 @@ class App extends React.Component {
     render(){
         return(
             <Router>
-                <Nav showAdd={this.state.showAdd} workouts={this.state.workouts}/>
+                <Nav showAdd={this.state.showAdd} workouts={this.state.workouts} name={this.state.name}/>
                 <Route exact path='/' render={() => (
                         this.state.showForm ?
-                        <form onSubmit={this.handleSubmit} className='shadow p-1 rounded'>
-                            <div className='p-1 pb-2 mb-1 rounded'>
-                                <h2 className='display-4'>User Name</h2>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    onChange={this.handleChange}
+                        <>
+                            <Logo />
+                            <form onSubmit={this.handleSubmit} className='shadow p-1 rounded'>
+                                <div className='p-1 pb-2 mb-1 rounded'>
+                                    <h2 className='display-4'>User Name</h2>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        onChange={this.handleChange}
+                                        />
+                                </div>
+                                <div className='rounded'>
+                                    <input
+                                        type="submit"
+                                        className='m-2 btn btn-primary'
                                     />
-                            </div>
-                            <div className='rounded'>
-                                <input
-                                    type="submit"
-                                    className='m-2 btn btn-primary'
-                                />
-                            </div>
-                        </form>
+                                </div>
+                            </form>
+                            </>
                         :
-                        <Home data={this.state.workouts}/>
+                        <Home data={this.state.workouts} name={this.state.name}/>
                 )}/>
 
                 <Route exact path='/how' component={How}/>
@@ -73,10 +77,12 @@ class App extends React.Component {
                     <MyStats {...props} data={this.state.workouts} name={this.state.name}/>
                 )}/>
 
-
-                <Route path='/add' render={(props) => (
-                    <AddWorkout {...props} firebase={this.props.firebase} data={this.state.workouts} name={this.state.name}/>
-                )}/>
+                {
+                    this.state.name != 'Anonymous' &&
+                    <Route path='/add' render={(props) => (
+                        <AddWorkout {...props} firebase={this.props.firebase} data={this.state.workouts} name={this.state.name}/>
+                    )}/>
+                }
 
 
             </Router>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 
-export const Home = ({ data }) => {
+export const Home = ({ data, name }) => {
     return (
         <div className='row centerWebkit'>
             <div className='col-12 col-lg-4 '>
@@ -18,7 +18,8 @@ export const Home = ({ data }) => {
                                     :
                                     <button className='btn btn-dark w-100 h-100' disabled>Do some exercises first</button>
                             }
-                        </Link>                </div>
+                        </Link>
+                    </div>
                 </div>
 
             </div>
@@ -29,8 +30,14 @@ export const Home = ({ data }) => {
                         <h5 className="card-title">New exercise</h5>
                         <p className="card-text">Start a new exercise or choose from one of your past exercises</p>
                         <Link to='/add'>
-                            <button className='btn btn-primary w-100 h-100'>Lets add new exercises</button>
-                        </Link>                </div>
+                            {
+                                (name != 'Anonymous') ?
+                                <button className='btn btn-primary w-100 h-100'>Lets add new exercises</button>
+                                :
+                                <button className='btn btn-dark w-100 h-100' disabled>Lets add new exercises</button>
+                            }
+                        </Link>
+                    </div>
                 </div>
 
             </div>
@@ -42,7 +49,8 @@ export const Home = ({ data }) => {
                         <p className="card-text">Read more about how to save your data with us. No registration</p>
                         <Link to='/how'>
                             <button className='btn btn-primary w-100 h-100'>How this app works...</button>
-                        </Link>                </div>
+                        </Link>
+                    </div>
                 </div>
 
             </div>

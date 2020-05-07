@@ -35,7 +35,7 @@ class Nav extends React.Component {
     };
 
     render(){
-        let { workouts, showAdd } = this.props
+        let { workouts, showAdd, name } = this.props
         return (
     
                     <ul className={classnames(
@@ -53,7 +53,7 @@ class Nav extends React.Component {
                             <Link className="nav-link" to='/stats'><i className="fas fa-chart-bar fa-2x"></i></Link>
                         </li>
                     }
-                    {   showAdd &&
+                    {   (showAdd && name != 'Anonymous') &&
                         <li className="nav-item" >
                             <Link className="nav-link" to='/add'><i className="fas fa-plus fa-2x"></i></Link>
                         </li>
