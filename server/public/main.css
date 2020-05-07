@@ -13,7 +13,7 @@ table {
     max-height: 40vh;
     font-size: 10px;
     color: #212529;
-    font-family: 'Hanuman', serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 table thead tbody {
@@ -32,6 +32,39 @@ th, td {
 
 h2 {
     border-bottom: groove gray 2px;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: 'IM Fell Double Pica SC', serif;
+}
+
+#logo {
+    background-color: #493a3a41;
+}
+
+img {
+    height: 10rem;
+}
+
+#leftImg {
+    transform: translateX(2.5rem) scale(1.1);
+}
+
+#centerImg {
+    transform: translateY(1rem);
+}
+
+#rightImg {
+    transform: translateX(-3.1rem) scale(1.1);
+}
+
+#logoH1 {
+    color: honeydew
+}
+
+p {
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .dates {
@@ -77,6 +110,9 @@ form div {
 #how {
     background-color: honeydew;
 }
+
+
+
 /* overrides */
 
 .container {
