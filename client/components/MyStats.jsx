@@ -38,7 +38,10 @@ export const MyStats = ({data, name}) => {
     return(
         <>
         <div className='graph mb-2'>
-            <div className='shadow p-1 bg-white rounded'>
+        <div className='shadow bg-white rounded'>
+            <p className='text-muted'>*Click/Tap on a row to display only that row in the graph.</p>
+        </div>
+            <div className='shadow p-1 bg-white rounded justify-content-center'>
                 <table className=''>
                     <thead className='bg-white'>
                         <tr>
@@ -55,7 +58,7 @@ export const MyStats = ({data, name}) => {
                         {
                             Object.keys(workoutData).map((item, i) => {
                                 return <tr key={i} >
-                                    <td className='exercises'>{item}</td>
+                                    <td className='exercises p-2' id={item} onClick={handleClick}>{item}</td>
                                     {
                                         dates.map((date, i) => {
                                             return <td key={i} id={item} onClick={handleClick}>
@@ -76,7 +79,7 @@ export const MyStats = ({data, name}) => {
         </div>
         {/* https://quickchart.io/documentation/ */}
         <div className='graph'>
-            <img className='w-100 shadow p-2 mb-2 bg-white rounded' src={`https://quickchart.io/chart?c=${chartData}`}/>
+            <img className='w-100 h-auto shadow p-2 mb-2 bg-white rounded' src={`https://quickchart.io/chart?c=${chartData}`}/>
         </div>
         </>
     )
