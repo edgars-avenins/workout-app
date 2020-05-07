@@ -16,6 +16,7 @@ export const How = () => {
             <h1>How to make sense of your exercise data?</h1>
                 <p className='shadow p-2 m-2 bg-white rounded'>Once in the <strong>' <i className="fas fa-chart-bar"></i> Table & Graphs '</strong> page by default the graph will display all of your exercises but you can choose a specific one by clicking/tapping on the corresponding row.</p>
                 <p className='shadow p-2 m-2 bg-white rounded'>In progress - adding the option to display exercises by type e.g. 'Repetitions, Time, Distance' in the graph.</p>
+                <p className='shadow p-2 m-2 bg-white rounded'>In progress #2 - adding the option to choose date range for displaying in the graph.</p>
         </div>
     )
 }
